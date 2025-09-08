@@ -1,0 +1,65 @@
+CREATE DATABASE PIDS_Tech;
+USE PIDS_Tech;
+
+-- Tabela de Professores
+CREATE TABLE Administrador (
+    id_professor INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+);
+
+-- Tabela de Participantes (Alunos)
+CREATE TABLE ParticipantesPT (
+    id_participante INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    turma VARCHAR(10)
+);
+
+-- Tabela de Componentes e Periféricos
+CREATE TABLE Componente_Periferico (
+    id_componente INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    marca VARCHAR(50),
+    status ENUM('Funcionando', 'Descartado') NOT NULL
+);
+
+-- Tabela de Doadores (Pessoa Física ou Jurídica)
+CREATE TABLE Pessoa (
+    id_pessoa INT PRIMARY KEY AUTO_INCREMENT,
+    tipo ENUM('Fisica', 'Juridica') NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    cpf VARCHAR(11) UNIQUE NULL,
+    cnpj VARCHAR(14) UNIQUE NULL
+);
+
+-- Tabela de Doações
+CREATE TABLE Doacao (
+    id_doacao INT PRIMARY KEY AUTO_INCREMENT,
+    id_pessoa INT,
+    id_componente INT,
+    data_doacao DATE NOT NULL,
+    FOREIGN KEY (id_pessoa) REFERENCES Pessoa(id_pessoa),
+    FOREIGN KEY (id_componente) REFERENCES Componente_Periferico(id_componente)
+);
+
+-- Tabela de Reparo das Peças (Inclui Avaliação)
+CREATE TABLE Reparo (
+    id_reparo INT PRIMARY KEY AUTO_INCREMENT,
+    id_componente INT,
+    id_participantespt INT,
+    data_reparo DATE NOT NULL,
+    descricao TEXT,
+    nota INT CHECK (nota BETWEEN 1 AND 10),
+    FOREIGN KEY (id_componente) REFERENCES Componente_Periferico(id_componente),
+    FOREIGN KEY (id_participantespt) REFERENCES Participantespt(id_participantespt)
+);
+
+-- Tabela de Recebimento das Peças Consertadas
+CREATE TABLE Recebimento (
+    id_recebimento INT PRIMARY KEY AUTO_INCREMENT,
+    id_pessoa INT,
+    id_componente INT,
+    data_recebimento DATE NOT NULL,
+    FOREIGN KEY (id_pessoa) REFERENCES Pessoa(id_pessoa),
+    FOREIGN KEY (id_componente) REFERENCES Componente_Periferico(id_componente)
+);
