@@ -552,7 +552,7 @@ class App(ttk.Notebook):
         root.geometry("960x640")
         self.pack(fill="both", expand=True)
         # Criar abas
-        self.add(TabAdministrador(self), text="Administradores")
+        self.add(TabAdministrador(self), text="Administrador")
         self.add(TabComponentes(self), text="Componentes")
         self.add(TabParticipantes(self), text="Participantes")
         self.add(TabPessoa(self), text="Pessoas")
