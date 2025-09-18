@@ -8,16 +8,16 @@ def tela_login() -> None:
     """Exibe uma janela de login e, ao autenticar, inicializa a aplicação principal."""
     login_root = tk.Tk()
     login_root.title("Login - PIDS Tech")
-    login_root.geometry("300x160")
+    login_root.geometry("300x300")
     login_root.resizable(False, False)
 
     # Widgets de login
-    tk.Label(login_root, text="Usuário:").grid(row=0, column=0, padx=10, pady=(20, 5), sticky="e")
-    usuario_entry = tk.Entry(login_root, width=25)
+    tk.Label(login_root, text="Adm:").grid(row=0, column=0, padx=10, pady=(20, 5), sticky="e")
+    usuario_entry = tk.Entry(login_root, width=35)
     usuario_entry.grid(row=0, column=1, pady=(20, 5))
 
     tk.Label(login_root, text="Senha:").grid(row=1, column=0, padx=10, pady=5, sticky="e")
-    senha_entry = tk.Entry(login_root, show="*", width=25)
+    senha_entry = tk.Entry(login_root, show="*", width=35)
     senha_entry.grid(row=1, column=1, pady=5)
 
     def tentar_login() -> None:
